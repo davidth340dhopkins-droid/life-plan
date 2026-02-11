@@ -1,14 +1,17 @@
 # PROMOTION & VERSIONING WORKFLOW
 
-I use three environments and Git to manage changes safely and professionally.
+I use three environments, Git, and **Filesystem Hardlinks** to manage changes.
 
-## 1. Environments
-- **DEV (/dev)**: Initial changes. Working directory for the agent.
-  - *Git*: `git checkout dev` (if using branches) or commit with `[DEV]` prefix.
-- **TEST (/test)**: Review environment.
-  - *Promotion*: `cp -r dev/* test/`
-- **STABLE (/stable)**: Production environment.
-  - *Promotion*: `cp -r test/* stable/`
+## 1. Automatic Content Sync
+- **The Core**: `content/plan.md` is the single source of truth.
+- **Hardlinks**: The `plan.md` files in `/dev`, `/test`, and `/stable` are **hardlinked** to the core file. 
+- **Effect**: Any change you or I make to `content/plan.md` is **automatically and instantly** reflected across all three environments (Dev, Test, Stable) without any manual copying.
+
+## 2. Environments & Code Promotion
+While content is synced, the **code** (index.html, CSS, transitions) can still be different:
+- **DEV (/dev)**: Initial UI/logic changes.
+- **TEST (/test)**: UI changes promoted for review.
+- **STABLE (/stable)**: Approved UI changes.
 
 ## 2. Git & GitHub Integration
 Every major change or promotion must be committed and pushed:
