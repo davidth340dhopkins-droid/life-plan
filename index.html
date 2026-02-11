@@ -186,7 +186,7 @@
     <div id="container"></div>
 
     <script>
-        const SITE_VERSION = "2.4.1";
+        const SITE_VERSION = "2.4.2";
 
         const port = window.location.port;
         const ENV_MAP = { "3010": "STABLE", "3011": "TEST", "3012": "DEV" };
@@ -214,6 +214,10 @@
                 if (next) next.scrollIntoView({ behavior: 'smooth' });
             } else {
                 // CENTER 75%: Toggle Theme on mousedown
+
+                // TEXT PROTECTION: Only toggle if NOT clicking on a text element
+                const protectedTags = ['H1', 'H2', 'P', 'LI', 'A', 'STRONG', 'EM', 'SPAN'];
+                if (protectedTags.includes(e.target.tagName)) return;
 
                 // CRITICAL FIX: Remove any text selection prior to the theme changing
                 window.getSelection().removeAllRanges();
