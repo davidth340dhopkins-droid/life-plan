@@ -170,6 +170,11 @@
             height: 100%;
         }
 
+        .no-select {
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
         @media (max-width: 600px) {
             .content {
                 padding: 0 1rem;
@@ -186,7 +191,7 @@
     <div id="container"></div>
 
     <script>
-        const SITE_VERSION = "2.4.3";
+        const SITE_VERSION = "2.4.4";
 
         const port = window.location.port;
         const ENV_MAP = { "3010": "STABLE", "3011": "TEST", "3012": "DEV" };
@@ -196,12 +201,24 @@
         let isScrolling = false;
         let scrollTimeout = null;
 
-        // Scroll state tracking: block interactions during movement
+        // Selection Lock Helper
+        const setSelectionLock = (locked) => {
+            if (locked) {
+                document.body.classList.add('no-select');
+                window.getSelection().removeAllRanges();
+            } else {
+                document.body.classList.remove('no-select');
+            }
+        };
+
+        // Scroll state tracking: block interactions and selection during movement
         window.addEventListener('scroll', () => {
             isScrolling = true;
+            setSelectionLock(true);
             clearTimeout(scrollTimeout);
             scrollTimeout = setTimeout(() => {
                 isScrolling = false;
+                setSelectionLock(false);
             }, 100);
         }, { passive: true });
 
@@ -233,14 +250,13 @@
                 const protectedTags = ['H1', 'H2', 'P', 'LI', 'A', 'STRONG', 'EM', 'SPAN'];
                 if (protectedTags.includes(e.target.tagName)) return;
 
-                // CRITICAL FIX: Remove any text selection prior to the theme changing
-                window.getSelection().removeAllRanges();
+                // CRITICAL FIX: Lock selection during theme fade (300ms)
+                setSelectionLock(true);
+                setTimeout(() => setSelectionLock(false), 300);
 
                 const current = document.documentElement.getAttribute('data-theme') || 'light';
                 const nextTheme = current === 'light' ? 'dark' : 'light';
                 document.documentElement.setAttribute('data-theme', nextTheme);
-
-                // Note: We no longer restore the selection to ensure perfect visual sync as requested.
             }
         });
 
