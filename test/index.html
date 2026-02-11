@@ -186,7 +186,7 @@
     <div id="container"></div>
 
     <script>
-        const SITE_VERSION = "2.3.3";
+        const SITE_VERSION = "2.4.0";
 
         const port = window.location.port;
         const ENV_MAP = { "3010": "STABLE", "3011": "TEST", "3012": "DEV" };
@@ -194,27 +194,16 @@
 
         let mouseDownPos = { x: 0, y: 0 };
 
+        // MOUSEDOWN EVENT: Trigger BEFORE browser commits selection
         document.addEventListener('mousedown', (e) => {
             mouseDownPos = { x: e.clientX, y: e.clientY };
-        });
-
-        document.addEventListener('click', (e) => {
-            const mouseUpPos = { x: e.clientX, y: e.clientY };
-            const dist = Math.sqrt(Math.pow(mouseUpPos.x - mouseDownPos.x, 2) + Math.pow(mouseUpPos.y - mouseDownPos.y, 2));
-
-            // 1. Drag Check Only:
-            // If the user dragged more than 5px, it's a drag/select operation. DO NOT toggle.
-            if (dist > 5) return;
-
-            // 2. "The Hammer":
-            // Anything else is a toggle or scroll. No guards. No protection.
 
             const y = e.clientY;
             const h = window.innerHeight;
             const section = e.target.closest('section');
             if (!section) return;
 
-            // 3. Region Logic (12.5% "Happy Medium" Zones)
+            // Region Logic (12.5% "Happy Medium" Zones)
             if (y < h * 0.125) {
                 // TOP 12.5%: Scroll Up
                 const prev = section.previousElementSibling;
@@ -224,26 +213,22 @@
                 const next = section.nextElementSibling;
                 if (next) next.scrollIntoView({ behavior: 'smooth' });
             } else {
-                // CENTER 75%: Toggle Theme (DOM State)
+                // CENTER 75%: Toggle Theme on mousedown
+                // This happens BEFORE browser commits selection state - eliminates ALL edge cases
                 const current = document.documentElement.getAttribute('data-theme') || 'light';
                 const nextTheme = current === 'light' ? 'dark' : 'light';
 
-                // CRITICAL FIX: Force selection refresh to prevent color desync
+                // Save, clear, apply, restore pattern
                 const sel = window.getSelection();
                 let savedRange = null;
 
-                // 1. Save the current selection if it exists
                 if (sel.rangeCount > 0) {
                     savedRange = sel.getRangeAt(0).cloneRange();
                 }
 
-                // 2. Clear selection temporarily
                 sel.removeAllRanges();
-
-                // 3. Apply theme change
                 document.documentElement.setAttribute('data-theme', nextTheme);
 
-                // 4. Restore selection on next frame (forces re-render with new theme)
                 if (savedRange) {
                     requestAnimationFrame(() => {
                         sel.removeAllRanges();
