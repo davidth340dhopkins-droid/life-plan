@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Strategy 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        :root {
+            --bg: #fff;
+            --text: #111;
+            --heading: #111;
+            --subheading: #888;
+            --meta: #999;
+            --hr: #eee;
+            --li-prefix: #ddd;
+            --version: #fff;
+            /* White version tag by default */
+        }
+
+        [data-theme="dark"] {
+            --bg: #000;
+            --text: #fff;
+            --heading: #fff;
+            --subheading: #666;
+            --meta: #666;
+            --hr: #222;
+            --li-prefix: #444;
+            --version: #000;
+            /* Black version tag in dark mode */
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+            background-color: var(--bg);
+            transition: background-color 0.3s ease;
+        }
+
+        body {
+            color: var(--text);
+            font-family: 'Inter', -apple-system, sans-serif;
+            line-height: 1.7;
+            scroll-snap-type: y mandatory;
+            overflow-y: scroll;
+            height: 100vh;
+        }
+
+        section {
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            scroll-snap-align: start;
+            padding: 2rem;
+            box-sizing: border-box;
+            opacity: 0;
+            transition: opacity 0.25s ease-out;
+            position: relative;
+        }
+
+        section.loaded {
+            opacity: 1;
+        }
+
+        .content {
+            max-width: 600px;
+            width: 100%;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            letter-spacing: -0.02em;
+            color: var(--heading);
+        }
+
+        h2 {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 2rem;
+            color: var(--subheading);
+            font-weight: 600;
+        }
+
+        p,
+        li {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        ul {
+            padding-left: 0;
+            list-style: none;
+        }
+
+        li {
+            margin-bottom: 1.5rem;
+            padding-left: 2rem;
+            position: relative;
+        }
+
+        li::before {
+            content: "—";
+            position: absolute;
+            left: 0;
+            color: var(--li-prefix);
+        }
+
+        strong {
+            color: var(--heading);
+            font-weight: 600;
+        }
+
+        em {
+            font-style: italic;
+            color: var(--meta);
+        }
+
+        .error {
+            color: #e74c3c;
+            text-align: center;
+        }
+
+        .site-version-tag {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            font-size: 0.8rem;
+            color: var(--version);
+            letter-spacing: 0.05em;
+            z-index: 5;
+        }
+
+        #container {
+            width: 100%;
+            height: 100%;
+        }
+
+        @media (max-width: 600px) {
+            .content {
+                padding: 0 1rem;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container"></div>
+
+    <script>
+        const SITE_VERSION = "1.5.0";
+        let currentTheme = 'light';
+
+        document.addEventListener('mousedown', (e) => {
+            window.lastMouseDownTarget = e.target;
+        });
+
+        document.addEventListener('click', (e) => {
+            // Check if user has an active text selection
+            const selection = window.getSelection().toString();
+            if (selection.length > 0) return;
+
+            // List of tags that contain text content. Clicks on these will be ignored for theme toggling.
+            const textTags = ['P', 'LI', 'H1', 'H2', 'STRONG', 'EM', 'SPAN', 'A', 'BLOCKQUOTE'];
+
+            // We check the target and the starting target (mousedown)
+            const isTextClick = textTags.includes(e.target.tagName) || (window.lastMouseDownTarget && textTags.includes(window.lastMouseDownTarget.tagName));
+
+            if (!isTextClick) {
+                currentTheme = currentTheme === 'light' ? 'dark' : 'light';
+                document.documentElement.setAttribute('data-theme', currentTheme);
+            }
+        });
+
+        async function loadMarkdown() {
+            const container = document.getElementById('container');
+            console.log(`%c Site v${SITE_VERSION} %c`, "color: #fff; background: #000; font-weight: bold; padding: 2px 5px;", "");
+
+            try {
+                const response = await fetch('content/plan.md');
+                if (!response.ok) throw new Error('Could not load plan.md');
+
+                const markdown = await response.text();
+                const contentBlocks = markdown.split(/\n---\s*\n/);
+
+                contentBlocks.forEach((block, index) => {
+                    const section = document.createElement('section');
+                    const innerContent = document.createElement('div');
+                    innerContent.className = 'content';
+
+                    let htmlContent = marked.parse(block.trim());
+
+                    if (index === 0) {
+                        // Plan version is now part of the markdown flow (italics)
+                        // Just extract for logging purposes, but don't remove from HTML
+                        const versionMatch = htmlContent.match(/<em>v(\d+\.\d+\.\d+)<\/em>/);
+                        if (versionMatch) {
+                            console.log(`%c Plan v${versionMatch[1]} %c`, "color: #666; background: #eee; font-weight: bold; padding: 2px 5px;", "");
+                        }
+
+                        // Site Version (Right) - Selectable ghost element
+                        const siteSpan = document.createElement('span');
+                        siteSpan.className = 'site-version-tag';
+                        siteSpan.textContent = `S.${SITE_VERSION}`;
+                        section.appendChild(siteSpan);
+                    }
+
+                    innerContent.innerHTML = htmlContent;
+                    section.appendChild(innerContent);
+                    container.appendChild(section);
+
+                    setTimeout(() => section.classList.add('loaded'), 50);
+                });
+
+            } catch (err) {
+                console.error(err);
+                container.innerHTML = `<section class="loaded"><div class="content error"><h1>Error</h1><p>${err.message}</p></div></section>`;
+            }
+        }
+
+        loadMarkdown();
+    </script>
+</body>
+
+</html>
