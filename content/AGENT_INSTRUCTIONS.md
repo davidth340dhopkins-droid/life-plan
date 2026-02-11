@@ -24,5 +24,9 @@ Every full-page "slide" in the dashboard MUST be separated by a standard markdow
 ## 4. Theme Interactions
 The renderer supports a Light/Dark mode toggle on background click. Do not add any custom HTML or style tags within `plan.md`, as they may interfere with the minimalist CSS.
 
+## 5. Git Management
+- Changes to `plan.md` must be committed to the local repository.
+- Use descriptive commit messages that include the new version number (e.g., `Update: v1.1.2 - Expanded section content`).
+
 ---
 *Created for the Life Plan Agent Workflow.*
