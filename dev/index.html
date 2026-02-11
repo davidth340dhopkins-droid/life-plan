@@ -186,7 +186,7 @@
     <div id="container"></div>
 
     <script>
-        const SITE_VERSION = "2.4.0";
+        const SITE_VERSION = "2.4.1";
 
         const port = window.location.port;
         const ENV_MAP = { "3010": "STABLE", "3011": "TEST", "3012": "DEV" };
@@ -214,27 +214,15 @@
                 if (next) next.scrollIntoView({ behavior: 'smooth' });
             } else {
                 // CENTER 75%: Toggle Theme on mousedown
-                // This happens BEFORE browser commits selection state - eliminates ALL edge cases
+
+                // CRITICAL FIX: Remove any text selection prior to the theme changing
+                window.getSelection().removeAllRanges();
+
                 const current = document.documentElement.getAttribute('data-theme') || 'light';
                 const nextTheme = current === 'light' ? 'dark' : 'light';
-
-                // Save, clear, apply, restore pattern
-                const sel = window.getSelection();
-                let savedRange = null;
-
-                if (sel.rangeCount > 0) {
-                    savedRange = sel.getRangeAt(0).cloneRange();
-                }
-
-                sel.removeAllRanges();
                 document.documentElement.setAttribute('data-theme', nextTheme);
 
-                if (savedRange) {
-                    requestAnimationFrame(() => {
-                        sel.removeAllRanges();
-                        sel.addRange(savedRange);
-                    });
-                }
+                // Note: We no longer restore the selection to ensure perfect visual sync as requested.
             }
         });
 
