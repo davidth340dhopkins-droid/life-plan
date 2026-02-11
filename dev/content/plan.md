@@ -1,38 +1,43 @@
-# My Personal Strategy 2026
+# David Hopkins: Strategy 2026
 
-A plan to maximize my current earnings, transition into a higher-paying career, and optimize my performance while working in Tallinn.
+My multi-phase roadmap for career transition, health optimization, and social mastery in Tallinn.
 
-*v1.0.6*
-
----
-
-## Phase 1: Wealth & Transition
-
-- **The 20% Rule:** Continue diverting 20% of Tallinn earnings to the Study Fund. No exceptions.
-- **Proof of Work:** Shift from "studying" to "building." Every week, one small project added to the GitHub/Figma showcase.
-- **Sourcing Opportunities:** Map out the HR leads at Bolt, Wise, and Pipedrive. Start "Low-Stakes Networking"—short messages asking for advice, not jobs.
-- **Aggressive Efficiency:** Treat delivery shifts like an F1 pit crew. Optimized routes, zero idle time, maximum profit per hour.
+*v1.0.9*
 
 ---
 
-## Phase 2: Peak Performance (Health)
+## Phase 1: The Foundation
 
-- **The Pre-Shift Lift:** 30 minutes of strength training or high-intensity movement before starting the day. Energy creates more energy.
-- **Sleep Architecture:** Standardized 10 PM wind-down. Use magnesium and total darkness to ensure recovery for the 6 AM study block.
-- **Biological Optimization:** Maintain the SAD lamp and Vitamin D protocol. Winter in Tallinn is managed, not suffered.
-- **Caffeine Timing:** No caffeine 8 hours before bed. Use coffee only as a strategic tool for the "Golden Time" study sessions.
+### Track: Wealth & Security
+- **My 20% Rule:** I am diverting 20% of all Tallinn earnings to my Study Fund to buy my future freedom.
+- **Aggressive Efficiency:** I treat my delivery shifts like an F1 pit crew—maximum profit per hour through route and promo optimization.
 
----
+### Track: Biological Baseline
+- **Sleep & Recovery:** I maintain a strict 10 PM wind-down. 8 hours of darkness is my non-negotiable recovery tool.
+- **Winter Management:** I use my SAD lamp and Vitamin D protocol daily to neutralize the Tallinn winter.
 
-## Phase 3: Social & Relationships
-
-- **The Presence Metric:** Aim for 3 "High-Value" conversations per week. People who are where I want to be professionally or socially.
-- **Active Listening Mastery:** In every interaction, focus on the other person until they feel like the only person in the room. This builds instant rapport.
-- **Social Diversification:** Join at least one "High-Status" group in Tallinn (Tennis, Padel, or a Tech Meetup). Move away from the lone-wolf delivery mindset.
-- **Visual Baseline:** Sharp grooming and clean attire are non-negotiable. I am always "interview-ready."
+### Track: Social Presence
+- **My Visual Baseline:** I maintain peak grooming standards. I am "interview-ready" every time I leave my apartment.
+- **Active Presence:** I practice active listening in every interaction, making whoever I'm talking to the center of the world.
 
 ---
 
-*"How you do anything is how you do everything."*
+## Phase 2: The Acceleration
+
+### Track: Career Transition
+- **Proof of Work:** I am building. Every week, I add one functional project or feature to my GitHub/Figma showcase.
+- **The HR Map:** I am identifying and contacting the specific decision-makers at Bolt, Wise, and Pipedrive for advice-based networking.
+
+### Track: Peak Performance (Health)
+- **The Pre-Shift Lift:** I do 30 minutes of high-intensity training before work. I use physical energy to fuel cognitive output.
+- **Strategic Caffeine:** I use coffee ONLY for my 6 AM "Golden Time" study blocks; never within 8 hours of sleep.
+
+### Track: Status & Influence
+- **Social Diversification:** I will join a high-status group (Padel, Tennis, or Tech Meetups) to exit the "lone wolf" delivery cycle.
+- **Value-Lead Networking:** I aim for 3 "High-Value" conversations per week with people who are already where I want to be.
+
+---
+
+*"How I do anything is how I do everything."*
 
 2026
