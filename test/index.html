@@ -186,16 +186,30 @@
     <div id="container"></div>
 
     <script>
-        const SITE_VERSION = "2.4.2";
+        const SITE_VERSION = "2.4.3";
 
         const port = window.location.port;
         const ENV_MAP = { "3010": "STABLE", "3011": "TEST", "3012": "DEV" };
         const ENV_LABEL = ENV_MAP[port] || "LOCAL";
 
         let mouseDownPos = { x: 0, y: 0 };
+        let isScrolling = false;
+        let scrollTimeout = null;
+
+        // Scroll state tracking: block interactions during movement
+        window.addEventListener('scroll', () => {
+            isScrolling = true;
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(() => {
+                isScrolling = false;
+            }, 100);
+        }, { passive: true });
 
         // MOUSEDOWN EVENT: Trigger BEFORE browser commits selection
         document.addEventListener('mousedown', (e) => {
+            // Block all toggles/scroll triggers while actively scrolling
+            if (isScrolling) return;
+
             mouseDownPos = { x: e.clientX, y: e.clientY };
 
             const y = e.clientY;
