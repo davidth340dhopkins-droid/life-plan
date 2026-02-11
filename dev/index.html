@@ -9,6 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <style>
         :root {
+            /* Light Theme (Default) */
             --bg: #fff;
             --text: #111;
             --heading: #111;
@@ -17,9 +18,14 @@
             --hr: #eee;
             --li-prefix: #ddd;
             --version: #fff;
+
+            /* Selection Colors - Vital for contrast during transitions */
+            --selection-bg: #111;
+            --selection-text: #fff;
         }
 
         [data-theme="dark"] {
+            /* Dark Theme */
             --bg: #000;
             --text: #fff;
             --heading: #fff;
@@ -28,13 +34,15 @@
             --hr: #222;
             --li-prefix: #444;
             --version: #000;
+
+            /* Inverted Selection for Dark Mode */
+            --selection-bg: #fff;
+            --selection-text: #000;
         }
 
-        /* GLOBAL TRANSITION FIX: 
-           Ensures text color animates even during selection/interactions.
-           Applies to everything to prevent "detached" visual states. */
-        * {
-            transition: background-color 0.3s ease, color 0.3s ease;
+        ::selection {
+            background: var(--selection-bg);
+            color: var(--selection-text);
         }
 
         html,
@@ -53,6 +61,10 @@
             scroll-snap-type: y mandatory;
             overflow-y: scroll;
             height: 100vh;
+            /* Only transition the background color. 
+               Text color transitions can cause "ghosting" artifacts during rapid theme switches.
+               Instant text color change is perceived as snappier and avoids sync issues. */
+            transition: background-color 0.3s ease;
         }
 
         section {
@@ -101,6 +113,8 @@
         li {
             font-size: 1.1rem;
             margin-bottom: 1rem;
+            /* Ensure text color is inherited instantly from body */
+            color: inherit;
         }
 
         ul {
@@ -168,7 +182,7 @@
     <div id="container"></div>
 
     <script>
-        const SITE_VERSION = "2.3.0";
+        const SITE_VERSION = "2.3.1";
 
         const port = window.location.port;
         const ENV_MAP = { "3010": "STABLE", "3011": "TEST", "3012": "DEV" };
@@ -186,15 +200,12 @@
                 const dist = Math.sqrt(Math.pow(mouseUpPos.x - mouseDownPos.x, 2) + Math.pow(mouseUpPos.y - mouseDownPos.y, 2));
 
                 // 1. Highlight/Drag Check:
-                // If the user dragged more than 3px, it's a selection. Ignore.
                 if (dist > 3) return;
 
                 // 2. Active Selection Check:
-                // If there is any text currently selected, ignore all background clicks.
                 if (window.getSelection().toString().length > 0) return;
 
                 // 3. Text Protection Shield:
-                // If clicking directly on a text element, DONT toggle theme/scroll.
                 const protectedTags = ['H1', 'H2', 'P', 'LI', 'A', 'STRONG', 'EM', 'SPAN'];
                 if (protectedTags.includes(e.target.tagName)) return;
 
@@ -203,17 +214,17 @@
                 const section = e.target.closest('section');
                 if (!section) return;
 
-                // 4. Region Logic (10% Zones)
-                if (y < h * 0.1) {
-                    // TOP 10%: Scroll Up
+                // 4. Region Logic (15% Zones - "A touch larger")
+                if (y < h * 0.15) {
+                    // TOP 15%: Scroll Up
                     const prev = section.previousElementSibling;
                     if (prev) prev.scrollIntoView({ behavior: 'smooth' });
-                } else if (y > h * 0.9) {
-                    // BOTTOM 10%: Scroll Down
+                } else if (y > h * 0.85) {
+                    // BOTTOM 15%: Scroll Down
                     const next = section.nextElementSibling;
                     if (next) next.scrollIntoView({ behavior: 'smooth' });
                 } else {
-                    // CENTER 80%: Toggle Theme (DOM State)
+                    // CENTER 70%: Toggle Theme (DOM State)
                     const current = document.documentElement.getAttribute('data-theme') || 'light';
                     const nextTheme = current === 'light' ? 'dark' : 'light';
                     document.documentElement.setAttribute('data-theme', nextTheme);
