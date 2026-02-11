@@ -2,44 +2,54 @@
 
 My multi-phase roadmap for career transition, health optimization, and social mastery in Tallinn.
 
-*v1.1.0*
+*v1.1.1*
 
-## My Core Goals for 2026
-- **Wealth:** Secure a high-paying career role at a top-tier Tallinn tech firm (Bolt, Wise, or Pipedrive).
-- **Health:** Achieve peak cognitive clarity and physical resilience, mastering the dark winter months.
-- **Relationships:** Build a network of high-value professional and social connections within the local community.
-
----
-
-## Phase 1: The Foundation
-
-### Track: Wealth & Security
-- **My 20% Rule:** I am diverting 20% of all Tallinn earnings to my Study Fund to buy my future freedom.
-- **Aggressive Efficiency:** I treat my delivery shifts like an F1 pit crew—maximum profit per hour through route and promo optimization.
-
-### Track: Biological Baseline
-- **Sleep & Recovery:** I maintain a strict 10 PM wind-down. 8 hours of darkness is my non-negotiable recovery tool.
-- **Winter Management:** I use my SAD lamp and Vitamin D protocol daily to neutralize the Tallinn winter.
-
-### Track: Social Presence
-- **My Visual Baseline:** I maintain peak grooming standards. I am "interview-ready" every time I leave my apartment.
-- **Active Presence:** I practice active listening in every interaction, making whoever I'm talking to the center of the world.
+## My Core Goals
+- **Wealth:** Secure a role at Bolt, Wise, or Pipedrive.
+- **Health:** Achieve peak cognitive and physical resilience.
+- **Relationships:** Build a high-value Tallinn network.
 
 ---
 
-## Phase 2: The Acceleration
+## Phase 1: Wealth & Security
 
-### Track: Career Transition
-- **Proof of Work:** I am building. Every week, I add one functional project or feature to my GitHub/Figma showcase.
-- **The HR Map:** I am identifying and contacting the specific decision-makers at Bolt, Wise, and Pipedrive for advice-based networking.
+- **My 20% Rule:** I am diverting 20% of all earnings to my Study Fund.
+- **Aggressive Efficiency:** I treat my delivery shifts like an F1 pit crew—maximum profit per hour.
 
-### Track: Peak Performance (Health)
-- **The Pre-Shift Lift:** I do 30 minutes of high-intensity training before work. I use physical energy to fuel cognitive output.
-- **Strategic Caffeine:** I use coffee ONLY for my 6 AM "Golden Time" study blocks; never within 8 hours of sleep.
+---
 
-### Track: Status & Influence
-- **Social Diversification:** I will join a high-status group (Padel, Tennis, or Tech Meetups) to exit the "lone wolf" delivery cycle.
-- **Value-Lead Networking:** I aim for 3 "High-Value" conversations per week with people who are already where I want to be.
+## Phase 1: Biological Baseline
+
+- **Sleep & Recovery:** I maintain a strict 10 PM wind-down. Darkness is my recovery tool.
+- **Winter Management:** I use my SAD lamp and Vitamin D daily to neutralize the Tallinn winter.
+
+---
+
+## Phase 1: Social Presence
+
+- **My Visual Baseline:** I am "interview-ready" every time I leave my apartment.
+- **Active Presence:** I practice active listening, making the other person the center of the world.
+
+---
+
+## Phase 2: Career Transition
+
+- **Proof of Work:** Every week, I add one functional project or feature to my GitHub/Figma showcase.
+- **The HR Map:** I am contacting decision-makers at Bolt, Wise, and Pipedrive for advice.
+
+---
+
+## Phase 2: Peak Performance
+
+- **The Pre-Shift Lift:** I do 30 minutes of high-intensity training before work. Energy fuels output.
+- **Strategic Caffeine:** Coffee is for 6 AM "Golden Time" blocks ONLY. None within 8 hours of sleep.
+
+---
+
+## Phase 2: Status & Influence
+
+- **Social Diversification:** I join high-status groups (Padel, Tennis, Tech) to exit the "lone wolf" cycle.
+- **Value-Lead Networking:** I aim for 3 "High-Value" conversations per week with my peers and mentors.
 
 ---
 
