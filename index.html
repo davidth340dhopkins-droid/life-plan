@@ -186,7 +186,7 @@
     <div id="container"></div>
 
     <script>
-        const SITE_VERSION = "2.3.2";
+        const SITE_VERSION = "2.3.3";
 
         const port = window.location.port;
         const ENV_MAP = { "3010": "STABLE", "3011": "TEST", "3012": "DEV" };
@@ -227,7 +227,29 @@
                 // CENTER 75%: Toggle Theme (DOM State)
                 const current = document.documentElement.getAttribute('data-theme') || 'light';
                 const nextTheme = current === 'light' ? 'dark' : 'light';
+
+                // CRITICAL FIX: Force selection refresh to prevent color desync
+                const sel = window.getSelection();
+                let savedRange = null;
+
+                // 1. Save the current selection if it exists
+                if (sel.rangeCount > 0) {
+                    savedRange = sel.getRangeAt(0).cloneRange();
+                }
+
+                // 2. Clear selection temporarily
+                sel.removeAllRanges();
+
+                // 3. Apply theme change
                 document.documentElement.setAttribute('data-theme', nextTheme);
+
+                // 4. Restore selection on next frame (forces re-render with new theme)
+                if (savedRange) {
+                    requestAnimationFrame(() => {
+                        sel.removeAllRanges();
+                        sel.addRange(savedRange);
+                    });
+                }
             }
         });
 
