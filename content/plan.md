@@ -2,7 +2,12 @@
 
 My multi-phase roadmap for career transition, health optimization, and social mastery in Tallinn.
 
-*v1.0.9*
+*v1.1.0*
+
+## My Core Goals for 2026
+- **Wealth:** Secure a high-paying career role at a top-tier Tallinn tech firm (Bolt, Wise, or Pipedrive).
+- **Health:** Achieve peak cognitive clarity and physical resilience, mastering the dark winter months.
+- **Relationships:** Build a network of high-value professional and social connections within the local community.
 
 ---
 
