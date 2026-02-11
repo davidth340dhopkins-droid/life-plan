@@ -162,31 +162,39 @@
     <div id="container"></div>
 
     <script>
-        const SITE_VERSION = "1.6.0";
+        const SITE_VERSION = "1.7.0";
         let currentTheme = 'light';
 
         // Detect environment based on port
         const port = window.location.port;
-        const ENV_MAP = {
-            "3010": "STABLE",
-            "3011": "TEST",
-            "3012": "DEV"
-        };
+        const ENV_MAP = { "3010": "STABLE", "3011": "TEST", "3012": "DEV" };
         const ENV_LABEL = ENV_MAP[port] || "LOCAL";
+
+        // Precision click tracking
+        let mouseDownPos = { x: 0, y: 0 };
+        let hadSelectionOnDown = false;
 
         document.addEventListener('mousedown', (e) => {
             window.lastMouseDownTarget = e.target;
+            mouseDownPos = { x: e.clientX, y: e.clientY };
+            hadSelectionOnDown = window.getSelection().toString().length > 0;
         });
 
         document.addEventListener('click', (e) => {
-            // Check if user has an active text selection
-            const selection = window.getSelection().toString();
-            if (selection.length > 0) return;
+            const mouseUpPos = { x: e.clientX, y: e.clientY };
+            const dist = Math.sqrt(Math.pow(mouseUpPos.x - mouseDownPos.x, 2) + Math.pow(mouseUpPos.y - mouseDownPos.y, 2));
 
-            // List of tags that contain text content. Clicks on these will be ignored for theme toggling.
-            const textTags = ['P', 'LI', 'H1', 'H2', 'STRONG', 'EM', 'SPAN', 'A', 'BLOCKQUOTE'];
+            // 1. Ignore if mouse moved (prevents toggle on drag/highlight)
+            if (dist > 5) return;
 
-            // We check the target and the starting target (mousedown)
+            // 2. Ignore if click was intended to clear an existing selection
+            if (hadSelectionOnDown) return;
+
+            // 3. Ignore if there's currently a selection
+            if (window.getSelection().toString().length > 0) return;
+
+            // 4. Ignore if clicking on text elements
+            const textTags = ['P', 'LI', 'H1', 'H2', 'STRONG', 'EM', 'SPAN', 'A', 'BLOCKQUOTE', 'OL', 'UL'];
             const isTextClick = textTags.includes(e.target.tagName) || (window.lastMouseDownTarget && textTags.includes(window.lastMouseDownTarget.tagName));
 
             if (!isTextClick) {
